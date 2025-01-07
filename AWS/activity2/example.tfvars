@@ -46,5 +46,7 @@ key_file_info = {
 
 webserver_info = {
   name = "nginx"
-  ami  = "ami-053b12d3152c0cc71"
+  ami_filter = {
+    
+  }
 }

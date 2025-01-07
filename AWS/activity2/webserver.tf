@@ -1,5 +1,5 @@
 resource "aws_instance" "web" {
-  ami                         = var.webserver_info.ami
+  ami                         = data.aws_ami.webimage.id
   instance_type               = var.webserver_info.instance_type
   associate_public_ip_address = var.webserver_info.associate_public_ip_address
   key_name                    = aws_key_pair.base.key_name
