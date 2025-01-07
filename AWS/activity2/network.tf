@@ -46,9 +46,9 @@ resource "aws_route_table" "public" {
   }
 
   depends_on = [
-    aws_vpc.base, 
+    aws_vpc.base,
     aws_internet_gateway.base
-    ]
+  ]
 }
 
 resource "aws_subnet" "private" {
