@@ -9,8 +9,42 @@ resource "aws_instance" "web" {
 
   subnet_id              = aws_subnet.public[0].id
   vpc_security_group_ids = [aws_security_group.base.id]
+  // user_data              = file("./install.sh")
+
+  root_block_device {
+    encrypted   = true
+    volume_size = 8
+    volume_type = "gp3"
+  }
+  metadata_options {
+    http_tokens            = "required"
+    instance_metadata_tags = "enabled"
+  }
 
   depends_on = [aws_key_pair.base,
-  aws_subnet.public, aws_security_group.base]
+    aws_subnet.public,
+    aws_security_group.base,
+  data.aws_ami.webimage]
 
 }
+
+
+
+resource "null_resource" "web_trigger" {
+  triggers = {
+    buiild_id = var.buiild_id
+  }
+
+  connection {
+    type        = "ssh"
+    user        = var.webserver_info.username
+    private_key = file(var.key_file_info.private_key_path)
+    host        = aws_instance.web.public_ip
+  }
+
+  provisioner "remote-exec" {
+    script = "./install.sh"
+
+  }
+}
+

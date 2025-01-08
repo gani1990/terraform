@@ -86,3 +86,9 @@ variable "webserver_info" {
   })
 
 }
+
+variable "buiild_id" {
+
+  type    = string
+  default = "1"
+}
