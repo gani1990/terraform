@@ -1,7 +1,6 @@
 azurerm_resource_group = {
   name     = "ntier"
   location = "eastus"
-  subscription_id="3529be14-e8d8-42e7-a938-5718795f09fc"
 }
 vnet_address_space = "10.0.0.0/16"
 subnets = [{
